@@ -40,7 +40,7 @@ public class CorrelationEngine(IStateStore stateStore, ILogger<CorrelationEngine
             logger.LogInformation("Trade completed: {TradeId}", trade.TradeId);
             return trade;
         }
-        
+
         var partial = allocationInstruction.ToPartialTrade(routingKey, existingPartial);
         await stateStore.SavePartialTradeAsync(partial);
         logger.LogInformation("Allocation saved as partial trade: {CorrelationKey}", correlationKey);
@@ -62,7 +62,4 @@ public class CorrelationEngine(IStateStore stateStore, ILogger<CorrelationEngine
 
     public async Task<ICollection<PartialTrade>> GetOrphanedTrades(TimeSpan maxAge)
         => await stateStore.GetPartialTradesByAgeAsync(maxAge);
-
-    private static string GetCorrelationKey(string orderId, DateTime tradeDate)
-        => $"{orderId}:{tradeDate:yyyyMMdd}";
 }
