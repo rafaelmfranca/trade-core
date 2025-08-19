@@ -1,18 +1,16 @@
 <Solution>
-  <Folder Name="/src/">
-    <Project Path="src\Core\Core.csproj" />
-    <Project Path="src\Infrastructure\Infrastructure.csproj" />
-    <Project Path="src\Application\Application.csproj" />
-    <Project Path="src\Api\Api.csproj" />
-  </Folder>
-  <Folder Name="/tests/">
-    <Project Path="tests\UnitTests\UnitTests.csproj" />
-    <Project Path="tests\IntegrationTests\IntegrationTests.csproj" />
-  </Folder>
-  <Folder Name="/Solution Items/">
-    <File Path=".gitignore" />
-  </Folder>
-  <Properties>
-    <SlnGenSolutionFolder>true</SlnGenSolutionFolder>
-  </Properties>
+    <Folder Name="/src/">
+        <Project Path="src\Core\Core.csproj"/>
+        <Project Path="src\Infrastructure\Infrastructure.csproj"/>
+        <Project Path="src\Application\Application.csproj"/>
+        <Project Path="src\Api\Api.csproj"/>
+    </Folder>
+    <Folder Name="/tests/">
+        <Project Path="tests\UnitTests\UnitTests.csproj"/>
+        <Project Path="tests\IntegrationTests\IntegrationTests.csproj"/>
+    </Folder>
+    <Folder Name="/Solution Items/">
+        <File Path=".gitignore"/>
+        <File Path="Directory.Packages.Props"/>
+    </Folder>
 </Solution>
