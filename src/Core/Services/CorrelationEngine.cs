@@ -26,22 +26,20 @@ public class CorrelationEngine(IStateStore stateStore, ILogger<CorrelationEngine
         return null;
     }
 
-    public async Task<Trade?> ProcessAllocationInstruction(
-        AllocationInstruction allocationInstruction,
-        string routingKey)
+    public async Task<Trade?> ProcessAllocationInstruction(AllocationInstruction allocInstruction, string routingKey)
     {
-        var correlationKey = allocationInstruction.GetCorrelationKey();
+        var correlationKey = allocInstruction.GetCorrelationKey();
         var existingPartial = await stateStore.GetPartialTradeAsync(correlationKey);
 
         if (existingPartial?.Execution is not null)
         {
-            var trade = allocationInstruction.ToTrade(existingPartial.Execution, routingKey);
+            var trade = allocInstruction.ToTrade(existingPartial.Execution, routingKey);
             await stateStore.SaveCompletedTradeAsync(trade);
             logger.LogInformation("Trade completed: {TradeId}", trade.TradeId);
             return trade;
         }
 
-        var partial = allocationInstruction.ToPartialTrade(routingKey, existingPartial);
+        var partial = allocInstruction.ToPartialTrade(routingKey, existingPartial);
         await stateStore.SavePartialTradeAsync(partial);
         logger.LogInformation("Allocation saved as partial trade: {CorrelationKey}", correlationKey);
         return null;
