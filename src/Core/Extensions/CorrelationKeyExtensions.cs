@@ -9,4 +9,7 @@ public static class CorrelationKeyExtensions
     
     public static CorrelationKey ToCorrelationKey(this AllocationInstruction allocInstruction) 
         => new(allocInstruction.TradeDate, allocInstruction.OrderId);
+
+    public static CorrelationKey ToCorrelationKey(this TradeId tradeId)
+        => new(tradeId.TradeDate, tradeId.Id);
 }
