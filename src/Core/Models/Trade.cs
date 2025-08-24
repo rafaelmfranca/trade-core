@@ -2,7 +2,7 @@ namespace Core.Models;
 
 public record Trade
 {
-    public string TradeId { get; init; } = string.Empty;
+    public TradeId TradeId { get; init; }
     public string OrderId { get; init; } = string.Empty;
     public DateTime TradeDate { get; init; }
     public ExecutionReport Execution { get; init; } = null!;

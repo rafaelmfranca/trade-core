@@ -2,7 +2,7 @@ namespace Core.Models;
 
 public record PartialTrade
 {
-    public string CorrelationKey { get; init; } = string.Empty;
+    public CorrelationKey CorrelationKey { get; init; }
     public string OrderId { get; init; } = string.Empty;
     public DateTime TradeDate { get; init; }
     public ExecutionReport? Execution { get; init; }

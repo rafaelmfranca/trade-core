@@ -10,7 +10,7 @@ public static class ExecutionReportExtensions
         PartialTrade? existing = null)
         => new()
         {
-            CorrelationKey = execution.GetCorrelationKey(),
+            CorrelationKey = execution.ToCorrelationKey(),
             OrderId = execution.OrderId,
             TradeDate = execution.TradeDate,
             Execution = execution,
@@ -27,7 +27,7 @@ public static class ExecutionReportExtensions
         bool isForced = false)
         => new()
         {
-            TradeId = execution.OrderId,
+            TradeId = execution.ToTradeId(),
             OrderId = execution.OrderId,
             TradeDate = execution.TradeDate,
             Execution = execution,
@@ -36,7 +36,4 @@ public static class ExecutionReportExtensions
             IsForced = isForced,
             RoutingKey = routingKey
         };
-
-    public static string GetCorrelationKey(this ExecutionReport execution)
-        => $"{execution.OrderId}:{execution.TradeDate:yyyy-MM-dd}";
 }

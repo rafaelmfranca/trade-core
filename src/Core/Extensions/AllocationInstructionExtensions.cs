@@ -10,7 +10,7 @@ public static class AllocationInstructionExtensions
         PartialTrade? existing = null)
         => new()
         {
-            CorrelationKey = allocation.GetCorrelationKey(),
+            CorrelationKey = allocation.ToCorrelationKey(),
             OrderId = allocation.OrderId,
             TradeDate = allocation.TradeDate,
             Execution = existing?.Execution,
@@ -27,7 +27,7 @@ public static class AllocationInstructionExtensions
         bool isForced = false)
         => new()
         {
-            TradeId = allocation.OrderId,
+            TradeId = allocation.ToTradeId(),
             OrderId = allocation.OrderId,
             TradeDate = allocation.TradeDate,
             Execution = execution,
@@ -36,7 +36,4 @@ public static class AllocationInstructionExtensions
             IsForced = isForced,
             RoutingKey = routingKey
         };
-
-    public static string GetCorrelationKey(this AllocationInstruction allocationInstruction)
-        => $"{allocationInstruction.OrderId}:{allocationInstruction.TradeDate:yyyyMMdd}";
 }

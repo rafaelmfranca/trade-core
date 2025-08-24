@@ -7,11 +7,11 @@ public static class PartialTradeExtensions
     public static Trade ToCompletedTrade(this PartialTrade partial, bool isForced = false)
     {
         if (!partial.IsComplete)
-            throw new InvalidOperationException($"Cannot create completed trade from incomplete partial: {partial.CorrelationKey}");
+            throw new InvalidOperationException($"Cannot create completed trade from incomplete partial: {partial.CorrelationKey.ToString()}");
 
         return new Trade
         {
-            TradeId = partial.OrderId,
+            TradeId = partial.ToTradeId(),
             OrderId = partial.OrderId,
             TradeDate = partial.TradeDate,
             Execution = partial.Execution!,
@@ -25,7 +25,7 @@ public static class PartialTradeExtensions
     public static Trade ToForcedTrade(this PartialTrade partial, Allocation allocation)
     {
         if (partial.Execution is null)
-            throw new InvalidOperationException($"Cannot force allocation for {partial.CorrelationKey}: no execution found");
+            throw new InvalidOperationException($"Cannot force allocation for {partial.CorrelationKey.ToString()}: no execution found");
 
         var forcedAllocation = new AllocationInstruction
         {
@@ -37,7 +37,7 @@ public static class PartialTradeExtensions
 
         return new Trade
         {
-            TradeId = partial.OrderId,
+            TradeId = partial.ToTradeId(),
             OrderId = partial.OrderId,
             TradeDate = partial.TradeDate,
             Execution = partial.Execution,
